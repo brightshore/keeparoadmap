@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Keep a Roadmap</title>
+  <meta name="description" content="A convention for keeping a ROADMAP.md: say what you're working on now, what comes next, what comes later, and what you've decided not to do.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <h1>Keep a Roadmap</h1>
+    <p class="tagline">Tell people where your project is going, and keep telling them the truth.</p>
+    <p class="version">Version <strong>1.0.0</strong></p>
+  </header>
+
+  <nav aria-label="On this page" class="toc">
+    <h2 id="contents-heading" class="visually-hidden">On this page</h2>
+    <ol>
+      <li><a href="#example">An example</a></li>
+      <li><a href="#what">What is a roadmap?</a></li>
+      <li><a href="#why">Why keep a roadmap?</a></li>
+      <li><a href="#who">Who needs a roadmap?</a></li>
+      <li><a href="#how">How do I keep a good roadmap?</a></li>
+      <li><a href="#bad">What makes a roadmap bad?</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+      <li><a href="#versioning">Versions of this convention</a></li>
+      <li><a href="#inspiration">Inspiration and prior art</a></li>
+    </ol>
+  </nav>
+
+  <main id="main">
+    <section id="example" aria-labelledby="example-heading">
+      <h2 id="example-heading">An example</h2>
+      <figure>
+        <pre class="example" tabindex="0"><code><!-- EXAMPLE --></code></pre>
+        <figcaption>
+          The roadmap of Ferry, a made-up tool for syncing dotfiles. Its issue
+          links are placeholders. The same file is in this convention's
+          repository as <a href="examples/ROADMAP.md"><code>examples/ROADMAP.md</code></a>.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="what" aria-labelledby="what-heading">
+      <h2 id="what-heading">What is a roadmap?</h2>
+      <p>
+        A roadmap is a short file that says what a project is working on now,
+        what it will take up next, what it means to get to later, and what it
+        has decided not to do.
+      </p>
+      <p>
+        It's written for the people around the project: users, contributors,
+        colleagues. It lives in the repository next to the code, as
+        <code>ROADMAP.md</code>, so it's versioned, reviewed and read like
+        everything else there.
+      </p>
+    </section>
+
+    <section id="why" aria-labelledby="why-heading">
+      <h2 id="why-heading">Why keep a roadmap?</h2>
+      <p>
+        Because people will ask where the project is headed, and one honest
+        answer in a known place beats a hundred partial ones scattered through
+        issue threads and chat logs.
+      </p>
+      <p>
+        A roadmap lets users decide whether to wait for something or look
+        elsewhere. It shows contributors which work is wanted. And it lets
+        maintainers say "not now" or "no" once, in writing, with a reason.
+      </p>
+    </section>
+
+    <section id="who" aria-labelledby="who-heading">
+      <h2 id="who-heading">Who needs a roadmap?</h2>
+      <p>
+        Any project that other people depend on. If someone has ever asked you
+        "is this coming?", your project needs one.
+      </p>
+    </section>
+
+    <section id="how" aria-labelledby="how-heading">
+      <h2 id="how-heading">How do I keep a good roadmap?</h2>
+
+      <h3 id="principles">Guiding principles</h3>
+      <ul class="principles">
+        <li>
+          <strong>Roadmaps are for people, not machines.</strong>
+          Write plain sentences that anyone can read in a couple of minutes.
+          The roadmap is not a data format or an export from a tool.
+        </li>
+        <li>
+          <strong>Horizons, not dates.</strong>
+          Group work by how soon you expect to get to it, not by when you hope
+          it will finish.
+        </li>
+        <li>
+          <strong>Every item links to where it's tracked.</strong>
+          The roadmap is the summary. The issue, track or pull request holds the
+          detail and the discussion.
+        </li>
+        <li>
+          <strong>Finished work leaves.</strong>
+          When something ships, it comes off the roadmap and goes into the
+          changelog.
+        </li>
+        <li>
+          <strong>Show when it was last reviewed.</strong>
+          A "Last reviewed" date at the top tells readers how far to trust the
+          rest of the page.
+        </li>
+        <li>
+          <strong>Say what you've decided not to do.</strong>
+          A considered "no" is as useful to a reader as a "yes", and it saves
+          you from answering the same request again.
+        </li>
+        <li>
+          <strong>Keep it short.</strong>
+          A roadmap is a choice of what matters. It is not a list of everything
+          anyone has ever asked for.
+        </li>
+      </ul>
+
+      <h3 id="layout">The layout</h3>
+      <p>A roadmap has, in this order:</p>
+      <ol>
+        <li>A title: <code># Roadmap</code>.</li>
+        <li>
+          A <code>Last reviewed:</code> line with the date of the last full
+          review, written as <code>YYYY-MM-DD</code>.
+        </li>
+        <li>
+          A sentence or two saying what this roadmap covers and where shipped
+          work is recorded.
+        </li>
+        <li>
+          Four sections, always these four and always in this order:
+          <strong>Now</strong>, <strong>Next</strong>, <strong>Later</strong>
+          and <strong>Not planned</strong>.
+        </li>
+      </ol>
+      <p>
+        If a section is empty, keep its heading and write "Nothing right now."
+        under it, so readers can tell it's empty on purpose.
+      </p>
+
+      <h3 id="sections">What goes in each section</h3>
+      <dl class="sections">
+        <dt id="now">Now</dt>
+        <dd>
+          Work that is underway: someone is on it today. Keep it small. As a
+          rule of thumb, Now should hold no more items than there are people,
+          or teams, actively working on them.
+        </dd>
+        <dt id="next">Next</dt>
+        <dd>
+          Work you've committed to starting when something in Now finishes.
+          It's understood well enough that someone could begin. List it in the
+          order you expect to take it up.
+        </dd>
+        <dt id="later">Later</dt>
+        <dd>
+          Things you intend to do but haven't worked out yet. Later is direction
+          more than plan, so it's fine for these items to be rough. It isn't
+          fine for Later to become the backlog.
+        </dd>
+        <dt id="not-planned">Not planned</dt>
+        <dd>
+          Things you considered and decided against, each with a short reason.
+          Only real decisions belong here. Ideas you simply haven't gotten to
+          stay in your issue tracker.
+        </dd>
+      </dl>
+
+      <h3 id="items">Writing an item</h3>
+      <ul>
+        <li>One list item per piece of work, starting with a short name in bold.</li>
+        <li>
+          Describe the outcome for the reader, not the task for the team:
+          "Windows support", not "Port the filesystem layer".
+        </li>
+        <li>Follow the name with a sentence or two on what changes and why it matters.</li>
+        <li>End with a link to where the work is tracked.</li>
+        <li>
+          Leave out dates, owners, percentages and status badges. An item's
+          status is the section it's in.
+        </li>
+        <li>Within a section, put the most important or soonest item first.</li>
+      </ul>
+
+      <h3 id="moving">Moving items</h3>
+      <ul>
+        <li>
+          Items move toward Now as they get closer: from Later to Next, and from
+          Next to Now.
+        </li>
+        <li>
+          Items can move back, too. Moving an item back is honest, not a
+          failure. Say why in the linked issue.
+        </li>
+        <li>
+          When you drop an item, move it to Not planned with a reason. Don't
+          delete something people were waiting for without a word.
+        </li>
+        <li>
+          If you change your mind about something in Not planned, move it back
+          into Later or Next and note why in its issue.
+        </li>
+      </ul>
+
+      <h3 id="shipping">When something ships</h3>
+      <p>
+        Remove it from Now, and record it in your changelog. If you follow
+        <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a>,
+        that means its Unreleased section. A roadmap never grows a "Done"
+        section: the changelog already is one.
+      </p>
+
+      <h3 id="reviewing">Reviewing</h3>
+      <p>
+        Read the whole roadmap on a regular rhythm, and whenever your
+        priorities shift. Move what has moved, cut what no longer matters, then
+        update the <code>Last reviewed</code> date. Update the date even when
+        nothing else changed: it records that someone looked, not that
+        something moved.
+      </p>
+      <p>
+        Keep Not planned items while people might still ask about them. Once
+        nobody would, you can remove them; the linked issue stays as the record.
+      </p>
+    </section>
+
+    <section id="bad" aria-labelledby="bad-heading">
+      <h2 id="bad-heading">What makes a roadmap bad?</h2>
+
+      <h3 id="bad-dates">Dates as promises</h3>
+      <p>
+        Write "Q3" next to an item and someone will plan around it. When it
+        slips, they stop trusting the rest of the roadmap too.
+      </p>
+
+      <h3 id="bad-backlog">The backlog dump</h3>
+      <p>
+        Pasting every open issue into Later. A roadmap with two hundred items
+        says nothing about priorities. Your tracker already holds the backlog.
+      </p>
+
+      <h3 id="bad-finished">Finished items that never leave</h3>
+      <p>
+        Strikethrough, checkmarks, a "Done" heading. Shipped work belongs in the
+        changelog, where readers look for it.
+      </p>
+
+      <h3 id="bad-stale">The stale roadmap</h3>
+      <p>
+        No review date, or one from two years ago. Readers can't tell whether
+        anything on it is still true, so they assume none of it is.
+      </p>
+
+      <h3 id="bad-crowded">Everything is Now</h3>
+      <p>
+        Ten items in Now and three people working on the project. If everything
+        is happening, nothing is.
+      </p>
+
+      <h3 id="bad-unlinked">Items that go nowhere</h3>
+      <p>
+        An item without a link can't be followed, discussed or checked. Readers
+        who care about it have nowhere to go.
+      </p>
+
+      <h3 id="bad-silent">Silent deletions</h3>
+      <p>
+        An item that people were waiting for disappears between one review and
+        the next. Move it to Not planned and say why instead.
+      </p>
+
+      <h3 id="bad-jargon">A task list in disguise</h3>
+      <p>
+        "Refactor ingest v2" means something to the team and nothing to anyone
+        else. Name the outcome a reader would notice.
+      </p>
+    </section>
+
+    <section id="faq" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently asked questions</h2>
+
+      <h3 id="faq-changelog">How is a roadmap different from a changelog?</h3>
+      <p>
+        A changelog records what has shipped. A roadmap says what's coming.
+        Together they make one timeline: work enters the roadmap, moves toward
+        Now, ships, and crosses over into the changelog. Both are written for
+        people, and both live in the repository.
+      </p>
+
+      <h3 id="faq-trackers">Doesn't my issue tracker already do this?</h3>
+      <p>
+        Your tracker holds every task, with its detail and discussion, for the
+        people doing the work. The roadmap is the short, curated view for
+        everyone else. It's readable without an account or a login, it's
+        versioned with the code, and it doesn't change unless someone decides
+        it should. Keep the work in the tracker, and link to it from each item.
+      </p>
+
+      <h3 id="faq-projects">What about GitHub Projects, or milestones?</h3>
+      <p>
+        Use them. A
+        <a href="https://docs.github.com/en/issues/planning-and-tracking-with-projects/customizing-views-in-your-project/customizing-the-roadmap-layout">roadmap layout in GitHub Projects</a>
+        places items on a timeline using date and iteration fields, which is
+        useful for planning the work.
+        <a href="https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/about-milestones">Milestones</a>
+        group issues and pull requests so you can see their progress. A
+        <code>ROADMAP.md</code> is the plain statement you make to readers on
+        top of all that. You can draft it from a project board, but have a
+        person edit the result.
+      </p>
+
+      <h3 id="faq-review">How often should I review it?</h3>
+      <p>
+        Monthly suits most projects. Review it sooner when priorities change,
+        and before each release, when you're already updating the changelog.
+        If a review keeps finding nothing to change, you can review less often,
+        but keep the date honest.
+      </p>
+
+      <h3 id="faq-dates">Why not dates?</h3>
+      <p>
+        Because readers take a date on a roadmap as a promise, and software
+        estimates are rarely good enough to promise on. A horizon says what you
+        actually know: the order you'll work in, and roughly how near each
+        thing is.
+      </p>
+      <p>
+        If a date outside your control really matters, such as a dependency
+        reaching end of life, state it as a fact in the item's description. It
+        is a constraint you're working against, not a delivery date.
+      </p>
+
+      <h3 id="faq-private">Does this work for private or internal projects?</h3>
+      <p>
+        Yes. The readers are colleagues, other teams and leadership instead of
+        the public, but the rules are the same. Not planned is often the most
+        useful section inside a company, because it settles questions that
+        would otherwise come back every quarter. Items can link to an internal
+        tracker, as long as your readers can open it.
+      </p>
+
+      <h3 id="faq-small">My project is tiny. Is this overkill?</h3>
+      <p>
+        A roadmap with one item in Now and one in Not planned is a perfectly
+        good roadmap. If nobody ever asks where the project is going, you may
+        not need one yet.
+      </p>
+
+      <h3 id="faq-sections">Can I add sections, or rename these?</h3>
+      <p>
+        Please don't. The same four headings in every roadmap mean readers know
+        where to look in any project. If a section feels too long to read,
+        that's usually a sign to cut it, not to split it.
+      </p>
+
+      <h3 id="faq-filename">What should I call the file, and where should it go?</h3>
+      <p>
+        <code>ROADMAP.md</code>, at the root of the repository, next to
+        <code>README.md</code> and <code>CHANGELOG.md</code>. Link to it from
+        your README.
+      </p>
+    </section>
+
+    <section id="versioning" aria-labelledby="versioning-heading">
+      <h2 id="versioning-heading">Versions of this convention</h2>
+      <p>
+        This page describes version 1.0.0 of Keep a Roadmap. Its version
+        numbers follow <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning 2.0.0</a>:
+      </p>
+      <ul>
+        <li>
+          a <strong>major</strong> version changes what a conforming roadmap
+          looks like, such as adding, removing or renaming a required section;
+        </li>
+        <li>
+          a <strong>minor</strong> version adds guidance without making any
+          conforming roadmap stop conforming;
+        </li>
+        <li>a <strong>patch</strong> version fixes wording, typos or links.</li>
+      </ul>
+      <p>
+        If you'd like to say which version your roadmap follows, put it in the
+        introduction: "This roadmap follows Keep a Roadmap 1.0.0."
+      </p>
+    </section>
+
+    <section id="inspiration" aria-labelledby="inspiration-heading">
+      <h2 id="inspiration-heading">Inspiration and prior art</h2>
+      <p>
+        Most of what's here was borrowed. These are the sources, and what we
+        took from each.
+      </p>
+      <dl class="credits">
+        <dt><a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a></dt>
+        <dd>
+          By Olivier Lacan and contributors, MIT licensed. The model for this
+          whole project: a plain Markdown file with a fixed shape, explained on
+          one page with guiding principles, a list of bad practices and an
+          FAQ, and versioned itself. This page follows its order of sections
+          closely (what, why, who, how, what makes it bad, questions), and our
+          "Finished work leaves" principle hands off to its Unreleased section.
+          The words are our own.
+        </dd>
+
+        <dt><a href="https://www.prodpad.com/blog/the-birth-of-the-modern-roadmap/">Now / Next / Later</a></dt>
+        <dd>
+          The three time horizons come from the roadmap format developed at
+          ProdPad by Janna Bastow and Simon Cast. In
+          <a href="https://www.prodpad.com/blog/the-birth-of-the-modern-roadmap/">“The Birth of the Modern Roadmap”</a>
+          (December 31, 2019), Bastow dates its first sketch to late 2012,
+          under the names Current, Near Term and Future. In
+          <a href="https://www.prodpad.com/blog/invented-now-next-later-roadmap/">“Why I Invented the Now-Next-Later Roadmap”</a>
+          (October 18, 2022), she explains dropping dates for those three
+          columns. Peter Gillard-Moss independently described a
+          <a href="https://www.thoughtworks.com/en-de/insights/blog/now-next-and-later">“Now, Next and Later”</a>
+          board at Thoughtworks in September 2012. The Not planned section and
+          the rules for a <code>ROADMAP.md</code> file aren't part of the
+          format as those posts describe it; they're ours.
+        </dd>
+
+        <dt><a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a></dt>
+        <dd>
+          By Tom Preston-Werner, licensed CC BY 3.0. This convention's own
+          version numbers follow it, as Keep a Changelog's do.
+        </dd>
+
+        <dt><a href="https://github.blog/changelog/2022-05-19-the-new-github-issues-may-19th-update/">GitHub’s “not planned” close reason</a></dt>
+        <dd>
+          Since May 2022, GitHub has let you close an issue as “not planned”
+          instead of completed. We borrowed the name for our fourth section,
+          because many readers already know what it means.
+        </dd>
+
+        <dt><a href="https://github.com/github/roadmap">GitHub’s public roadmap</a></dt>
+        <dd>
+          A working example of an open roadmap where every item is an issue,
+          arranged by how far out it is. It supports our rule that every item
+          links to where it's tracked. It places items by quarter; we chose not
+          to.
+        </dd>
+
+        <dt><a href="https://help.iso.org/en/articles/376284-iso-8601-international-standard-for-date-and-time-format">ISO 8601</a></dt>
+        <dd>
+          The <code>YYYY-MM-DD</code> date format we use for the
+          <code>Last reviewed</code> line, as Keep a Changelog does for release
+          dates.
+        </dd>
+      </dl>
+      <p>
+        GitHub Projects' roadmap layout and milestones are mentioned in the
+        <a href="#faq-projects">FAQ</a> as tools that work alongside a roadmap.
+        We didn't take ideas from them, so they aren't credited as sources.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      Keep a Roadmap was created by John Campion Jr. The full list of sources
+      and their licenses is in this repository's
+      <a href="CREDITS.md"><code>CREDITS.md</code></a>.
+    </p>
+    <!-- TODO(John): add the license line here once LICENSE is chosen. -->
+  </footer>
+</body>
+</html>

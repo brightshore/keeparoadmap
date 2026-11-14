@@ -1,0 +1,19 @@
+# Not deployed yet. When the site goes live, Netlify runs the build and
+# publishes dist/. The build needs nothing but Node.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Serve the Markdown files the page links to as readable text.
+[[headers]]
+  for = "/CREDITS.md"
+  [headers.values]
+    Content-Type = "text/markdown; charset=utf-8"
+
+[[headers]]
+  for = "/examples/*"
+  [headers.values]
+    Content-Type = "text/markdown; charset=utf-8"

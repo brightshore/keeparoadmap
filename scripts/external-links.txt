@@ -1,0 +1,15 @@
+# Every external URL on the page. The test suite fails if the page links to a
+# URL missing from this list, or if the list names one the page no longer uses.
+# Each was opened and read on 2026-11-14; the note says what it showed.
+# Re-check with `npm run check:external` (some sites refuse scripts; open those by hand).
+
+https://keepachangelog.com/en/1.1.0/ | Keep a Changelog 1.1.0; footer: "MIT licensed, created and maintained by Olivier Lacan"
+https://www.prodpad.com/blog/the-birth-of-the-modern-roadmap/ | Janna Bastow, December 31, 2019; dates the first sketch to late 2012, columns "Current", "Near Term", "Future"
+https://www.prodpad.com/blog/invented-now-next-later-roadmap/ | Janna Bastow, October 18, 2022, "Why I Invented the Now-Next-Later Roadmap"
+https://www.thoughtworks.com/en-de/insights/blog/now-next-and-later | Peter Gillard-Moss, Thoughtworks, September 10, 2012, "Now, Next and Later" columns
+https://semver.org/spec/v2.0.0.html | Semantic Versioning 2.0.0, Tom Preston-Werner, CC BY 3.0
+https://github.blog/changelog/2022-05-19-the-new-github-issues-may-19th-update/ | May 19, 2022: close an issue as "complete" or "not planned"
+https://github.com/github/roadmap | GitHub's public roadmap: "Every item on the roadmap is an issue"
+https://help.iso.org/en/articles/376284-iso-8601-international-standard-for-date-and-time-format | ISO 8601: "Date expressed as YYYY-MM-DD"
+https://docs.github.com/en/issues/planning-and-tracking-with-projects/customizing-views-in-your-project/customizing-the-roadmap-layout | GitHub Docs: roadmap layout shows items "on a timeline"
+https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/about-milestones | GitHub Docs: milestones "track progress on groups of issues or pull requests"

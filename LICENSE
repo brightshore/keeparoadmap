@@ -1,0 +1,16 @@
+TODO(John): choose a license before publishing.
+
+Proposal (not decided):
+
+- The page text and CREDITS.md: Creative Commons Attribution 4.0
+  International (CC BY 4.0). It lets anyone translate, adapt and republish the
+  convention, as long as they credit it. That's the same family Semantic
+  Versioning uses (CC BY 3.0) for its spec text.
+- examples/ROADMAP.md: CC0 1.0 (public domain dedication), so people can copy
+  the example into their own projects as a starting point without adding
+  attribution to their repositories.
+- The build scripts and tests: MIT, as Keep a Changelog uses for its repository.
+
+The simpler alternative is MIT for everything, exactly as Keep a Changelog does.
+It's familiar, but it's written for software, and it's an awkward fit for prose
+that people will translate and quote.
