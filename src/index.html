@@ -115,8 +115,9 @@
         </li>
         <li>
           <strong>Say what you've decided not to do.</strong>
-          A considered "no" is as useful to a reader as a "yes", and it saves
-          you from answering the same request again.
+          Once you've considered something and dropped it, say so. A considered
+          "no" is as useful to a reader as a "yes", and it saves you from
+          answering the same request again.
         </li>
         <li>
           <strong>Keep it short.</strong>
@@ -131,21 +132,36 @@
         <li>A title: <code># Roadmap</code>.</li>
         <li>
           A <code>Last reviewed:</code> line with the date of the last full
-          review, written as <code>YYYY-MM-DD</code>.
+          review, written as year, month and day: <code>YYYY-MM-DD</code>.
         </li>
         <li>
           A sentence or two saying what this roadmap covers and where shipped
           work is recorded.
         </li>
         <li>
-          Four sections, always these four and always in this order:
-          <strong>Now</strong>, <strong>Next</strong>, <strong>Later</strong>
-          and <strong>Not planned</strong>.
+          A line saying which version of this convention it follows, with a
+          link:
+          <code>This roadmap follows [Keep a Roadmap 1.0.0](https://keeparoadmap.com/).</code>
+        </li>
+        <li>
+          Three sections, always these three and always in this order:
+          <strong>Now</strong>, <strong>Next</strong> and
+          <strong>Later</strong>.
+        </li>
+        <li>
+          A fourth section, <strong>Not planned</strong>, last, once you've
+          considered something and dropped it. Leave it out until then.
         </li>
       </ol>
       <p>
-        If a section is empty, keep its heading and write "Nothing right now."
-        under it, so readers can tell it's empty on purpose.
+        If Now, Next or Later is empty, keep its heading and write "Nothing
+        right now." under it, so readers can tell it's empty on purpose.
+      </p>
+      <p>
+        Inside any section, you can group items under subheadings by theme,
+        such as <code>### Docs</code> under Next. Put items that don't belong
+        to a theme first, before any subheading. The sections themselves stay
+        fixed: the same names, in the same order.
       </p>
 
       <h3 id="sections">What goes in each section</h3>
@@ -171,8 +187,9 @@
         <dt id="not-planned">Not planned</dt>
         <dd>
           Things you considered and decided against, each with a short reason.
-          Only real decisions belong here. Ideas you simply haven't gotten to
-          stay in your issue tracker.
+          Add the section the first time you drop something; until then, leave
+          it out. Only real decisions belong here. Ideas you simply haven't
+          gotten to stay in your issue tracker.
         </dd>
       </dl>
 
@@ -203,8 +220,9 @@
           failure. Say why in the linked issue.
         </li>
         <li>
-          When you drop an item, move it to Not planned with a reason. Don't
-          delete something people were waiting for without a word.
+          When you drop an item, move it to Not planned with a reason, adding
+          that section if this is the first. Don't delete something people
+          were waiting for without a word.
         </li>
         <li>
           If you change your mind about something in Not planned, move it back
@@ -358,9 +376,24 @@
 
       <h3 id="faq-sections">Can I add sections, or rename these?</h3>
       <p>
-        Please don't. The same four headings in every roadmap mean readers know
-        where to look in any project. If a section feels too long to read,
-        that's usually a sign to cut it, not to split it.
+        No. The same headings in the same order in every roadmap mean readers
+        know where to look in any project. Now, Next and Later always appear;
+        Not planned appears once you've dropped something.
+      </p>
+      <p>
+        You can group items inside a section under subheadings, such as
+        <code>### Docs</code> or <code>### Performance</code> under Next. Use
+        them for themes, not for status, owners or dates. And if a section
+        feels too long to read even with subheadings, that's usually a sign to
+        cut it, not to split it.
+      </p>
+
+      <h3 id="faq-not-planned">Do I need a Not planned section from the start?</h3>
+      <p>
+        No. Add it the first time you consider something and decide against
+        it. An empty Not planned section tells readers nothing, but the first
+        real entry in it usually answers a question people were already
+        asking.
       </p>
 
       <h3 id="faq-filename">What should I call the file, and where should it go?</h3>
@@ -389,8 +422,9 @@
         <li>a <strong>patch</strong> version fixes wording, typos or links.</li>
       </ul>
       <p>
-        If you'd like to say which version your roadmap follows, put it in the
-        introduction: "This roadmap follows Keep a Roadmap 1.0.0."
+        Every roadmap says which version it follows, in the line described in
+        <a href="#layout">the layout</a>. When a new version comes out, update
+        that line at your next review, once your roadmap matches it.
       </p>
     </section>
 
@@ -449,12 +483,6 @@
           to.
         </dd>
 
-        <dt><a href="https://help.iso.org/en/articles/376284-iso-8601-international-standard-for-date-and-time-format">ISO 8601</a></dt>
-        <dd>
-          The <code>YYYY-MM-DD</code> date format we use for the
-          <code>Last reviewed</code> line, as Keep a Changelog does for release
-          dates.
-        </dd>
       </dl>
       <p>
         GitHub Projects' roadmap layout and milestones are mentioned in the
@@ -466,11 +494,18 @@
 
   <footer class="site-footer">
     <p>
-      Keep a Roadmap was created by John Campion Jr. The full list of sources
+      Keep a Roadmap was created by John Campion. The full list of sources
       and their licenses is in this repository's
       <a href="CREDITS.md"><code>CREDITS.md</code></a>.
     </p>
-    <!-- TODO(John): add the license line here once LICENSE is chosen. -->
+    <p>
+      The text is licensed
+      <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>,
+      the example roadmap is
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>, and
+      the build code is MIT. Details are in
+      <a href="LICENSE"><code>LICENSE</code></a>.
+    </p>
   </footer>
 </body>
 </html>

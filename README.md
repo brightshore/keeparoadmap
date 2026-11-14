@@ -59,4 +59,13 @@ before deciding it's broken.
 
 ## License
 
-Not chosen yet. See `LICENSE`.
+Copyright (c) 2026 John Campion. Each part has its own license:
+
+- the convention and site text, including `CREDITS.md` and this README:
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/);
+- `examples/ROADMAP.md`:
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), so you can
+  copy it into your project without attribution;
+- the build scripts and tests: MIT.
+
+`LICENSE` lists which files each license covers.

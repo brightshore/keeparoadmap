@@ -125,17 +125,6 @@ Where our page follows a source's structure closely, this file says so.
 - **Checked:** the repository README, quoted above. It also says "the roadmap is
   subject to change, especially further out on the timeline."
 
-## ISO 8601
-
-- **By:** the International Organization for Standardization.
-- **Link:**
-  <https://help.iso.org/en/articles/376284-iso-8601-international-standard-for-date-and-time-format>
-- **What we took:** the `YYYY-MM-DD` format for the `Last reviewed` line.
-- **Checked:** the ISO help article, which says "Date expressed as YYYY-MM-DD
-  (year-month-day)". The usual page,
-  <https://www.iso.org/iso-8601-date-and-time-format.html>, refused our
-  automated fetch (HTTP 403), so we link the help article instead.
-
 ## Mentioned, not credited
 
 - **GitHub Projects' roadmap layout**

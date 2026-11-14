@@ -17,7 +17,7 @@ const ids = new Set(attrValues("id"));
 const links = [...attrValues("href"), ...attrValues("src")];
 
 test("the build writes the page and the files it links to", () => {
-  for (const file of ["index.html", "style.css", "favicon.svg", "CREDITS.md", "examples/ROADMAP.md"]) {
+  for (const file of ["index.html", "style.css", "favicon.svg", "CREDITS.md", "LICENSE", "examples/ROADMAP.md"]) {
     assert.ok(existsSync(join(dist, file)), `dist/${file} is missing`);
   }
 });
@@ -83,19 +83,88 @@ test("the stylesheet has a dark color scheme", () => {
   assert.match(css, /@media \(prefers-color-scheme: dark\)/);
 });
 
-test("the example follows the format it demonstrates", () => {
-  const lines = example.split("\n");
-  assert.equal(lines[0], "# Roadmap");
-  assert.match(example, /^Last reviewed: \d{4}-\d{2}-\d{2}$/m);
-  const sections = lines.filter((line) => line.startsWith("## "));
-  assert.deepEqual(sections, ["## Now", "## Next", "## Later", "## Not planned"]);
-
-  const items = example.match(/^- \*\*[^*]+\*\*[\s\S]*?(?=^- |^## |^\[|(?![\s\S]))/gm);
-  assert.ok(items.length > 0);
-  for (const item of items) {
-    assert.match(item, /\[#\d+\]\s*$/, `item has no tracker link: ${item.slice(0, 40)}`);
+// The layout rules from the page, as a checker. Returns a list of problems.
+function checkRoadmap(text) {
+  const problems = [];
+  const lines = text.split("\n");
+  if (lines[0] !== "# Roadmap") problems.push("first line is not '# Roadmap'");
+  if (!/^Last reviewed: \d{4}-\d{2}-\d{2}$/m.test(text)) problems.push("no 'Last reviewed: YYYY-MM-DD' line");
+  if (!/^This roadmap follows \[Keep a Roadmap \d+\.\d+\.\d+\]\(https:\/\/keeparoadmap\.com\/\)\.$/m.test(text)) {
+    problems.push("no version line");
   }
-  for (const [, ref] of example.matchAll(/\[(#\d+)\](?!:)/g)) {
-    assert.match(example, new RegExp(`^\\[${ref}\\]: https://`, "m"), `${ref} has no link definition`);
+
+  const sections = lines.filter((line) => /^## /.test(line));
+  const required = ["## Now", "## Next", "## Later"];
+  const allowed = [required, [...required, "## Not planned"]];
+  if (!allowed.some((list) => JSON.stringify(list) === JSON.stringify(sections))) {
+    problems.push(`sections are ${JSON.stringify(sections)}`);
+  }
+  const firstSection = lines.findIndex((line) => line.startsWith("## "));
+  lines.forEach((line, i) => {
+    if (/^#{3,} /.test(line) && !/^### \S/.test(line)) problems.push(`subheading deeper than ###: ${line}`);
+    if (/^### /.test(line) && (firstSection < 0 || i < firstSection)) problems.push(`subheading outside a section: ${line}`);
+  });
+
+  const items = text.match(/^- \*\*[^*]+\*\*[\s\S]*?(?=^- |^#{2,} |^\[|(?![\s\S]))/gm) ?? [];
+  if (items.length === 0) problems.push("no items");
+  for (const item of items) {
+    if (!/\[#\d+\]\s*$/.test(item)) problems.push(`item has no tracker link: ${item.slice(0, 40)}`);
+  }
+  for (const [, ref] of text.matchAll(/\[(#\d+)\](?!:)/g)) {
+    if (!new RegExp(`^\\[${ref}\\]: https://`, "m").test(text)) problems.push(`${ref} has no link definition`);
+  }
+  return problems;
+}
+
+const minimal = [
+  "# Roadmap",
+  "",
+  "Last reviewed: 2026-11-14",
+  "",
+  "This roadmap follows [Keep a Roadmap 1.0.0](https://keeparoadmap.com/).",
+  "",
+  "## Now",
+  "",
+  "- **A thing.** It matters. [#1]",
+  "",
+  "## Next",
+  "",
+  "Nothing right now.",
+  "",
+  "## Later",
+  "",
+  "### Docs",
+  "",
+  "- **A guide.** For new users. [#2]",
+  "",
+  "[#1]: https://example.com/1",
+  "[#2]: https://example.com/2",
+].join("\n");
+
+test("the example follows the format it demonstrates", () => {
+  assert.deepEqual(checkRoadmap(example), []);
+});
+
+test("the example shows the optional parts: Not planned and a subheading", () => {
+  assert.match(example, /^## Not planned$/m);
+  assert.match(example, /^### \S/m);
+});
+
+test("a roadmap without Not planned conforms", () => {
+  assert.deepEqual(checkRoadmap(minimal), []);
+});
+
+test("the checker rejects what the layout forbids", () => {
+  const cases = {
+    "missing version line": minimal.replace(/^This roadmap follows.*$/m, ""),
+    "missing Later": minimal.replace("## Later", "### Later"),
+    "renamed section": minimal.replace("## Next", "## Soon"),
+    "extra section": `${minimal}\n\n## Ideas\n`,
+    "Not planned before Later": minimal.replace("## Later", "## Not planned\n\n## Later"),
+    "subheading too deep": minimal.replace("### Docs", "#### Docs"),
+    "item without link": minimal.replace("It matters. [#1]", "It matters."),
+  };
+  for (const [name, text] of Object.entries(cases)) {
+    assert.notDeepEqual(checkRoadmap(text), [], `${name} should not conform`);
   }
 });

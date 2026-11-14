@@ -1,16 +1,48 @@
-TODO(John): choose a license before publishing.
+Keep a Roadmap is made of three parts, each under its own license.
 
-Proposal (not decided):
+1. The convention and site text: CC BY 4.0
+   src/index.html (its prose), CREDITS.md and README.md.
 
-- The page text and CREDITS.md: Creative Commons Attribution 4.0
-  International (CC BY 4.0). It lets anyone translate, adapt and republish the
-  convention, as long as they credit it. That's the same family Semantic
-  Versioning uses (CC BY 3.0) for its spec text.
-- examples/ROADMAP.md: CC0 1.0 (public domain dedication), so people can copy
-  the example into their own projects as a starting point without adding
-  attribution to their repositories.
-- The build scripts and tests: MIT, as Keep a Changelog uses for its repository.
+   Copyright (c) 2026 John Campion
 
-The simpler alternative is MIT for everything, exactly as Keep a Changelog does.
-It's familiar, but it's written for software, and it's an awkward fit for prose
-that people will translate and quote.
+   Licensed under the Creative Commons Attribution 4.0 International License.
+   To view a copy of this license, visit
+   https://creativecommons.org/licenses/by/4.0/
+   Full legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+
+   When you share or adapt it, credit "Keep a Roadmap by John Campion", link
+   to the license, and say if you made changes.
+
+2. The example roadmap: CC0 1.0
+   examples/ROADMAP.md.
+
+   To the extent possible under law, John Campion has waived all copyright
+   and related or neighboring rights to examples/ROADMAP.md. Copy it into
+   your own project without attribution.
+   Full legal code: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+3. The build scripts and tests: MIT
+   build.mjs, serve.mjs, scripts/, test/, src/style.css, src/favicon.svg,
+   package.json and netlify.toml.
+
+   MIT License
+
+   Copyright (c) 2026 John Campion
+
+   Permission is hereby granted, free of charge, to any person obtaining a copy
+   of this software and associated documentation files (the "Software"), to deal
+   in the Software without restriction, including without limitation the rights
+   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   copies of the Software, and to permit persons to whom the Software is
+   furnished to do so, subject to the following conditions:
+
+   The above copyright notice and this permission notice shall be included in all
+   copies or substantial portions of the Software.
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   SOFTWARE.

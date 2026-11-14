@@ -6,6 +6,8 @@ This is where Ferry is headed. It's a plan, not a promise: items move as we
 learn more, and nothing here has a date. Work that has shipped is listed in the
 [changelog](CHANGELOG.md). To suggest something, open an issue.
 
+This roadmap follows [Keep a Roadmap 1.0.0](https://keeparoadmap.com/).
+
 ## Now
 
 - **Windows support.** Run the same `ferry` commands on Windows, with a copy
@@ -21,6 +23,11 @@ learn more, and nothing here has a date. Work that has shipped is listed in the
   for each one and no long-lived branches. [#173]
 - **Plain-language errors.** Every error says what went wrong and what to try
   next, instead of printing a stack trace. [#220]
+
+### Docs
+
+- **Migration guides.** Step-by-step moves to Ferry from GNU Stow, chezmoi
+  and yadm. [#231]
 
 ## Later
 
@@ -43,4 +50,5 @@ learn more, and nothing here has a date. Work that has shipped is listed in the
 [#198]: https://github.com/ferry-cli/ferry/issues/198
 [#214]: https://github.com/ferry-cli/ferry/issues/214
 [#220]: https://github.com/ferry-cli/ferry/issues/220
+[#231]: https://github.com/ferry-cli/ferry/issues/231
 [#240]: https://github.com/ferry-cli/ferry/issues/240

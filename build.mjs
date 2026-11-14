@@ -1,5 +1,5 @@
 // Builds the site into dist/: copies src/, inlines examples/ROADMAP.md into the
-// page, and publishes the example and CREDITS.md beside it so the page can link
+// page, and publishes the example, CREDITS.md and LICENSE beside it so the page can link
 // to them. No dependencies beyond Node itself.
 import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -29,6 +29,7 @@ export function build() {
   mkdirSync(join(dist, "examples"), { recursive: true });
   cpSync(join(root, "examples", "ROADMAP.md"), join(dist, "examples", "ROADMAP.md"));
   cpSync(join(root, "CREDITS.md"), join(dist, "CREDITS.md"));
+  cpSync(join(root, "LICENSE"), join(dist, "LICENSE"));
   return dist;
 }
 

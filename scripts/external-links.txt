@@ -10,6 +10,7 @@ https://www.thoughtworks.com/en-de/insights/blog/now-next-and-later | Peter Gill
 https://semver.org/spec/v2.0.0.html | Semantic Versioning 2.0.0, Tom Preston-Werner, CC BY 3.0
 https://github.blog/changelog/2022-05-19-the-new-github-issues-may-19th-update/ | May 19, 2022: close an issue as "complete" or "not planned"
 https://github.com/github/roadmap | GitHub's public roadmap: "Every item on the roadmap is an issue"
-https://help.iso.org/en/articles/376284-iso-8601-international-standard-for-date-and-time-format | ISO 8601: "Date expressed as YYYY-MM-DD"
+https://creativecommons.org/licenses/by/4.0/ | Creative Commons Attribution 4.0 International deed (our text license)
+https://creativecommons.org/publicdomain/zero/1.0/ | CC0 1.0 Universal deed (our example's license)
 https://docs.github.com/en/issues/planning-and-tracking-with-projects/customizing-views-in-your-project/customizing-the-roadmap-layout | GitHub Docs: roadmap layout shows items "on a timeline"
 https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/about-milestones | GitHub Docs: milestones "track progress on groups of issues or pull requests"
