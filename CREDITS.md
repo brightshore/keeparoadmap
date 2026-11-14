@@ -125,6 +125,48 @@ Where our page follows a source's structure closely, this file says so.
 - **Checked:** the repository README, quoted above. It also says "the roadmap is
   subject to change, especially further out on the timeline."
 
+## llms.txt
+
+- **By:** Jeremy Howard. The repository is kept by Answer.AI.
+- **Link:** <https://llmstxt.org/>
+- **License:** the site states none. Its repository,
+  <https://github.com/AnswerDotAI/llms-txt>, is Apache 2.0. Its LICENSE file
+  is the unfilled Apache template ("Copyright [yyyy] [name of copyright
+  owner]"), so it names no copyright holder.
+- **What we took:** the format of our `/llms.txt`: an H1 with the site's name,
+  a blockquote summary, a paragraph, then H2 sections of `[name](url): notes`
+  links, with secondary links under `## Optional`. We also followed its advice
+  to publish a Markdown version of each page, at `index.md` for a URL with no
+  file name, and to point to it with `<link rel="alternate"
+  type="text/markdown">` and to `llms.txt` with `rel="describedby"`.
+- **What we left out:** an `llms-full.txt`. The proposal doesn't mention one,
+  and `index.md` already holds the whole convention.
+- **License conditions:** we follow the format and copy none of its text or
+  code, so Apache 2.0's conditions don't arise.
+- **Checked:**
+  - <https://llmstxt.org/> and <https://llmstxt.org/index.md>. The page is
+    titled "The /llms.txt file", with "Author: Jeremy Howard" and "Published:
+    September 3, 2024". It says the H1 "is the only required section", and
+    that the "Optional" section is "for secondary information: links an agent
+    can skip when a shorter context is needed". It doesn't say whether links
+    must be absolute. Its examples use absolute URLs, so ours do too. It says
+    nothing about `llms-full.txt`, `llms-ctx.txt` or `llms-ctx-full.txt`.
+  - <https://github.com/AnswerDotAI/llms-txt> and its LICENSE file, as above.
+
+## AI Hero's "Agent discovery" footer
+
+- **By:** AI Hero.
+- **Link:** <https://www.aihero.dev/>
+- **What we took:** the idea of a short "Agent discovery" list at the bottom
+  of the page, linking the files agents can read. AI Hero's list covers an
+  MCP server, OpenAPI documents, an API catalog, `llms.txt` and a Markdown
+  sitemap. Keep a Roadmap has no API, so ours links only the content files:
+  `llms.txt`, `index.md`, `ROADMAP.md` and `sitemap.md`.
+- **License:** not applicable. We took an idea, not text or code.
+- **Checked:** <https://www.aihero.dev/>. Its last section is headed "Agent
+  discovery" and lists links such as "LLM orientation" (`/llms.txt`) and
+  "Markdown sitemap" (`/sitemap.md`).
+
 ## Mentioned, not credited
 
 - **GitHub Projects' roadmap layout**

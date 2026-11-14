@@ -169,3 +169,27 @@ dd {
   color: var(--muted);
   font-size: 0.95rem;
 }
+
+.agent-discovery {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.agent-discovery h2 {
+  margin: 0 0 0.25rem;
+  font-size: inherit;
+  font-weight: 600;
+}
+
+.agent-discovery ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.agent-discovery a {
+  color: inherit;
+}

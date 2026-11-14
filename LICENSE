@@ -1,7 +1,8 @@
 Keep a Roadmap is made of three parts, each under its own license.
 
 1. The convention and site text: CC BY 4.0
-   src/index.html (its prose), CREDITS.md and README.md.
+   src/index.html (its prose), CREDITS.md and README.md, and the files the
+   build generates from them: index.md, llms.txt and sitemap.md.
 
    Copyright (c) 2026 John Campion
 
@@ -14,7 +15,7 @@ Keep a Roadmap is made of three parts, each under its own license.
    to the license, and say if you made changes.
 
 2. The example roadmap: CC0 1.0
-   examples/ROADMAP.md.
+   examples/ROADMAP.md, also published as ROADMAP.md.
 
    To the extent possible under law, John Campion has waived all copyright
    and related or neighboring rights to examples/ROADMAP.md. Copy it into

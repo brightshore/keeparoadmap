@@ -1,10 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { build } from "../build.mjs";
+import { build, publicFiles, siteUrl } from "../build.mjs";
 import { readExternalLinks } from "../scripts/external-links.mjs";
+import { htmlToMarkdown } from "../scripts/html-to-markdown.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = build();
@@ -76,6 +77,125 @@ test("the page is readable without JavaScript and has basic accessible structure
   for (const img of html.match(/<img\b[^>]*>/g) ?? []) {
     assert.match(img, /\salt="/, `image without alt: ${img}`);
   }
+});
+
+// The files for agents: llms.txt, index.md, ROADMAP.md and sitemap.md.
+const agentFiles = ["llms.txt", "index.md", "ROADMAP.md", "sitemap.md"];
+const readDist = (file) => readFileSync(join(dist, file), "utf8");
+const markdownLinks = (text) => [...text.matchAll(/\]\(([^)\s]+)\)/g)].map((m) => m[1]);
+
+// Maps an absolute URL on the site to its file in dist/; anything else is a failure.
+function distPathOf(url) {
+  assert.ok(url.startsWith(siteUrl), `${url} is not on ${siteUrl}`);
+  const path = url.slice(siteUrl.length).split("#")[0];
+  return path === "" ? "index.html" : path;
+}
+
+function filesIn(dir, prefix = "") {
+  return readdirSync(join(dir, prefix), { withFileTypes: true }).flatMap((entry) =>
+    entry.isDirectory() ? filesIn(dir, join(prefix, entry.name)) : [join(prefix, entry.name)],
+  );
+}
+
+test("the build writes the files for agents", () => {
+  for (const file of agentFiles) {
+    assert.ok(existsSync(join(dist, file)), `dist/${file} is missing`);
+  }
+  assert.equal(readDist("ROADMAP.md"), example, "dist/ROADMAP.md should be the example, unchanged");
+});
+
+test("llms.txt follows the llms.txt structure: H1, blockquote, paragraphs, then H2 link lists", () => {
+  const blocks = readDist("llms.txt").trimEnd().split(/\n\n+/);
+  assert.match(blocks[0], /^# \S[^\n]*$/, "first block is a single H1");
+  assert.match(blocks[1], /^> \S[^\n]*$/, "second block is a one-line blockquote summary");
+  const firstSection = blocks.findIndex((block) => block.startsWith("## "));
+  assert.ok(firstSection >= 2, "there is at least one H2 section, after the summary");
+  for (const block of blocks.slice(2, firstSection)) {
+    assert.doesNotMatch(block, /^#/m, `no headings before the first H2: ${block}`);
+  }
+  const sections = blocks.slice(firstSection);
+  for (let i = 0; i < sections.length; i += 2) {
+    assert.match(sections[i], /^## \S[^\n]*$/, `expected an H2, got: ${sections[i]}`);
+    const list = sections[i + 1] ?? "";
+    assert.ok(list, `${sections[i]} has no links`);
+    for (const line of list.split("\n")) {
+      assert.match(line, /^- \[[^\]]+\]\(https:\/\/[^)\s]+\)(: \S.*)?$/, `not a file list item: ${line}`);
+    }
+  }
+  assert.deepEqual(
+    sections.filter((block) => block.startsWith("## ")),
+    ["## Docs", "## Optional"],
+  );
+});
+
+test("llms.txt points at the convention, the example and the credits, and every link resolves in dist/", () => {
+  const links = markdownLinks(readDist("llms.txt"));
+  const paths = links.map(distPathOf);
+  for (const path of paths) assert.ok(existsSync(join(dist, path)), `${path} does not exist in dist/`);
+  for (const wanted of ["index.md", "ROADMAP.md", "CREDITS.md"]) {
+    assert.ok(paths.includes(wanted), `llms.txt should link ${wanted}`);
+  }
+});
+
+test("sitemap.md lists every file in dist/, and nothing else", () => {
+  const listed = markdownLinks(readDist("sitemap.md")).map(distPathOf).sort();
+  const actual = filesIn(dist).map((path) => path.split("\\").join("/")).sort();
+  assert.deepEqual(listed, actual);
+  assert.deepEqual(publicFiles.map((file) => file.path).sort(), actual);
+});
+
+test("index.md has every heading on the page, at the same level and in the same order", () => {
+  // Every heading except the table of contents' hidden one, which index.md leaves out with the rest of the nav.
+  const page = html.replace(/<nav[\s\S]*?<\/nav>/, "");
+  const headings = [...page.matchAll(/<h([1-6])[^>]*>([\s\S]*?)<\/h\1>/g)].map(
+    ([, level, inner]) => `${"#".repeat(Number(level))} ${inner.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim()}`,
+  );
+  const markdownHeadings = readDist("index.md").split("\n").filter((line) => /^#{1,6} /.test(line))
+    // The example inside the fenced block has headings of its own.
+    .filter((line) => !example.split("\n").includes(line));
+  assert.ok(headings.length > 30, "the page should have found its headings");
+  assert.deepEqual(markdownHeadings, headings);
+});
+
+test("index.md carries the example exactly, in a fenced block", () => {
+  assert.ok(readDist("index.md").includes(`\`\`\`markdown\n${example.trimEnd()}\n\`\`\`\n`));
+});
+
+test("every relative link in index.md resolves, and in-page anchors point at the HTML page", () => {
+  // The example in its fenced block links to Ferry's own files, which aren't ours.
+  const prose = readDist("index.md").replace(/^```[\s\S]*?^```$/gm, "");
+  const relativeLinks = markdownLinks(prose).filter((href) => !/^[a-z]+:/i.test(href));
+  assert.ok(relativeLinks.length > 0);
+  for (const href of relativeLinks) {
+    const [path, fragment] = href.split("#");
+    assert.ok(path, `${href} has no file part, but Markdown headings carry no ids`);
+    assert.ok(existsSync(join(dist, path)), `${href} does not resolve in dist/`);
+    if (fragment) assert.ok(ids.has(fragment), `${href} fragment not found`);
+  }
+});
+
+test("the footer's agent discovery section links each file for agents", () => {
+  const footer = html.match(/<footer[\s\S]*?<\/footer>/)?.[0] ?? "";
+  const section = footer.match(/<section class="agent-discovery" aria-labelledby="([^"]+)">([\s\S]*?)<\/section>/);
+  assert.ok(section, "no agent discovery section in the footer");
+  assert.match(section[2], new RegExp(`<h2 id="${section[1]}">Agent discovery</h2>`));
+  const hrefs = [...section[2].matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
+  assert.deepEqual(hrefs.sort(), [...agentFiles].sort());
+});
+
+test("the page tells agents where its Markdown twin and llms.txt are", () => {
+  assert.match(html, /<link rel="alternate" href="index.md" type="text\/markdown">/);
+  assert.match(html, /<link rel="describedby" href="llms.txt" type="text\/plain">/);
+});
+
+test("the Markdown converter refuses elements it doesn't know, instead of dropping them", () => {
+  assert.throws(() => htmlToMarkdown("<body><table></table></body>"), /<table>/);
+  assert.throws(() => htmlToMarkdown("<body><p>a <span>b</span></p></body>"), /<span>/);
+  assert.throws(() => htmlToMarkdown("<body><p>&copy;</p></body>"), /&copy;/);
+  assert.equal(
+    htmlToMarkdown('<body><p>Use <a href="#x"><code>a*b</code></a> or *c*.</p></body>'),
+    "Use [`a*b`](#x) or \\*c\\*.\n",
+  );
 });
 
 test("the stylesheet has a dark color scheme", () => {

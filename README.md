@@ -10,7 +10,12 @@ It isn't published yet.
 - `src/index.html` holds the page, and its prose is the convention itself.
   `src/style.css` holds the styles.
 - `examples/ROADMAP.md` is the worked example. The build inlines it into the
-  page, so edit it here, not in the HTML.
+  page, so edit it here, not in the HTML. It's also published as `/ROADMAP.md`.
+- The build also writes files for agents, linked from the page's "Agent
+  discovery" footer: `index.md` (the page as Markdown, converted from the
+  built HTML by `scripts/html-to-markdown.mjs`), `llms.txt` and `sitemap.md`.
+  Don't edit them; they're generated. `publicFiles` in `build.mjs` lists every
+  published file, and the build fails if `dist/` holds one it doesn't list.
 - `CREDITS.md` lists every source, how it was checked, and its license.
 - `build.mjs` is the build. It needs Node 20 or later and has no dependencies.
 - `test/` checks the build and the page's links.
@@ -45,7 +50,11 @@ The tests build the site and check that:
 - every in-page anchor and relative link resolves;
 - the example on the page matches `examples/ROADMAP.md`;
 - the page has the basic accessible structure and works without JavaScript;
-- every external URL on the page is in `scripts/external-links.txt`.
+- every external URL on the page is in `scripts/external-links.txt`;
+- `llms.txt` follows the llms.txt structure and links only files in `dist/`;
+- `index.md` has every heading on the page and the example, unchanged;
+- `sitemap.md` lists every file in `dist/`, and the footer links each file
+  for agents.
 
 The tests don't touch the network. To check the external URLs themselves, run
 this once when the list changes:
