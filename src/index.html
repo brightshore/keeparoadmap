@@ -135,6 +135,13 @@
           review, written as year, month and day: <code>YYYY-MM-DD</code>.
         </li>
         <li>
+          If the project has a tracker, a <code>Tracker:</code> line with one
+          link to it, as its own paragraph:
+          <code>Tracker: [Ferry project board](https://github.com/orgs/ferry-cli/projects/1)</code>.
+          Leave it out if there's no tracker. See
+          <a href="#tracker">linking to your tracker</a>.
+        </li>
+        <li>
           A sentence or two saying what this roadmap covers and where shipped
           work is recorded.
         </li>
@@ -209,6 +216,24 @@
         <li>Within a section, put the most important or soonest item first.</li>
       </ul>
 
+      <h3 id="tracker">Linking to your tracker</h3>
+      <p>
+        If the detail lives somewhere, such as a GitHub project board, an issue
+        tracker, Linear, Jira or a set of milestones, point to it once, in the
+        <code>Tracker:</code> line under <code>Last reviewed</code>. The
+        roadmap is the few items you chose to tell people about. The tracker
+        holds every task. The roadmap links to the tracker, but it never
+        mirrors it.
+      </p>
+      <p>
+        The <code>Tracker:</code> line doesn't replace the link at the end of
+        each item. The two links do different jobs. An item's link goes to the
+        issue behind that one piece of work. The <code>Tracker:</code> line is
+        for readers who want the whole picture, including everything the
+        roadmap leaves out. Pick one place for it: a board, a filtered view or
+        the issue list, whichever your readers can open.
+      </p>
+
       <h3 id="moving">Moving items</h3>
       <ul>
         <li>
@@ -263,8 +288,10 @@
 
       <h3 id="bad-backlog">The backlog dump</h3>
       <p>
-        Pasting every open issue into Later. A roadmap with two hundred items
-        says nothing about priorities. Your tracker already holds the backlog.
+        Pasting every open issue into Later, or syncing them in from the
+        tracker. A roadmap with two hundred items says nothing about
+        priorities. Your tracker already holds the backlog, so link to it in
+        the <code>Tracker:</code> line instead of copying it.
       </p>
 
       <h3 id="bad-finished">Finished items that never leave</h3>
@@ -321,7 +348,9 @@
         people doing the work. The roadmap is the short, curated view for
         everyone else. It's readable without an account or a login, it's
         versioned with the code, and it doesn't change unless someone decides
-        it should. Keep the work in the tracker, and link to it from each item.
+        it should. Keep the work in the tracker. Link to the tracker once in the
+        <a href="#tracker"><code>Tracker:</code> line</a>, and link each item
+        to its own issue.
       </p>
 
       <h3 id="faq-projects">What about GitHub Projects, or milestones?</h3>
@@ -333,8 +362,17 @@
         <a href="https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/about-milestones">Milestones</a>
         group issues and pull requests so you can see their progress. A
         <code>ROADMAP.md</code> is the plain statement you make to readers on
-        top of all that. You can draft it from a project board, but have a
-        person edit the result.
+        top of all that. Put the board's link in the
+        <a href="#tracker"><code>Tracker:</code> line</a>. You can draft the
+        roadmap from the board, but have a person edit the result.
+      </p>
+
+      <h3 id="faq-generate">Why not generate the roadmap from the tracker?</h3>
+      <p>
+        Because choosing is the point. A generated roadmap shows whatever the
+        tracker holds today, stale issues and all. It changes without anyone
+        deciding it should, and soon it's the backlog dump again. Write the
+        few items by hand, and link to the tracker for the rest.
       </p>
 
       <h3 id="faq-review">How often should I review it?</h3>

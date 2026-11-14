@@ -93,6 +93,20 @@ function checkRoadmap(text) {
     problems.push("no version line");
   }
 
+  // The optional Tracker line: at most one, a single link, in its own paragraph straight after Last reviewed.
+  const trackerLines = lines.filter((line) => /^Tracker:/.test(line));
+  if (trackerLines.length > 1) problems.push("more than one Tracker line");
+  for (const line of trackerLines) {
+    if (!/^Tracker: \[[^\]]+\]\(https:\/\/[^\s)]+\)$/.test(line)) problems.push(`Tracker line is not one link: ${line}`);
+  }
+  if (trackerLines.length > 0) {
+    const reviewed = lines.findIndex((line) => line.startsWith("Last reviewed:"));
+    const tracker = lines.indexOf(trackerLines[0]);
+    if (reviewed < 0 || lines[reviewed + 1] !== "" || tracker !== reviewed + 2) {
+      problems.push("Tracker line is not its own paragraph straight after Last reviewed");
+    }
+  }
+
   const sections = lines.filter((line) => /^## /.test(line));
   const required = ["## Now", "## Next", "## Later"];
   const allowed = [required, [...required, "## Not planned"]];
@@ -141,6 +155,13 @@ const minimal = [
   "[#2]: https://example.com/2",
 ].join("\n");
 
+const reviewedLine = "Last reviewed: 2026-11-14";
+const trackerLine = "Tracker: [Project board](https://example.com/board)";
+
+test("a roadmap with a Tracker line conforms", () => {
+  assert.deepEqual(checkRoadmap(minimal.replace(reviewedLine, `${reviewedLine}\n\n${trackerLine}`)), []);
+});
+
 test("the example follows the format it demonstrates", () => {
   assert.deepEqual(checkRoadmap(example), []);
 });
@@ -148,6 +169,19 @@ test("the example follows the format it demonstrates", () => {
 test("the example shows the optional parts: Not planned and a subheading", () => {
   assert.match(example, /^## Not planned$/m);
   assert.match(example, /^### \S/m);
+});
+
+test("the example's Tracker line is one valid link, straight after Last reviewed", () => {
+  const lines = example.split("\n");
+  const reviewed = lines.findIndex((line) => line.startsWith("Last reviewed:"));
+  const tracker = lines.findIndex((line) => line.startsWith("Tracker:"));
+  assert.ok(tracker > 0, "the example should show the optional Tracker line");
+  assert.equal(tracker, reviewed + 2, "Tracker should be the paragraph right after Last reviewed");
+  const [, url] = lines[tracker].match(/^Tracker: \[[^\]]+\]\(([^)]+)\)$/) ?? [];
+  assert.ok(url, `not a single Markdown link: ${lines[tracker]}`);
+  assert.equal(new URL(url).protocol, "https:");
+  const firstSection = lines.findIndex((line) => line.startsWith("## "));
+  assert.ok(tracker < firstSection, "Tracker belongs in the header");
 });
 
 test("a roadmap without Not planned conforms", () => {
@@ -163,6 +197,11 @@ test("the checker rejects what the layout forbids", () => {
     "Not planned before Later": minimal.replace("## Later", "## Not planned\n\n## Later"),
     "subheading too deep": minimal.replace("### Docs", "#### Docs"),
     "item without link": minimal.replace("It matters. [#1]", "It matters."),
+    "Tracker line without a link": minimal.replace(reviewedLine, `${reviewedLine}\n\nTracker: our board`),
+    "Tracker line with two links": minimal.replace(reviewedLine, `${reviewedLine}\n\n${trackerLine} and [Jira](https://example.com/jira)`),
+    "Tracker line in the wrong place": minimal.replace("## Now", `${trackerLine}\n\n## Now`),
+    "Tracker line run into Last reviewed": minimal.replace(reviewedLine, `${reviewedLine}\n${trackerLine}`),
+    "two Tracker lines": minimal.replace(reviewedLine, `${reviewedLine}\n\n${trackerLine}\n\n${trackerLine}`),
   };
   for (const [name, text] of Object.entries(cases)) {
     assert.notDeepEqual(checkRoadmap(text), [], `${name} should not conform`);

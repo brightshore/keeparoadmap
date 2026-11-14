@@ -2,6 +2,8 @@
 
 Last reviewed: 2026-11-14
 
+Tracker: [Ferry project board](https://github.com/orgs/ferry-cli/projects/1)
+
 This is where Ferry is headed. It's a plan, not a promise: items move as we
 learn more, and nothing here has a date. Work that has shipped is listed in the
 [changelog](CHANGELOG.md). To suggest something, open an issue.
