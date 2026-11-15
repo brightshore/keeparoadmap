@@ -2,8 +2,8 @@
 
 A convention for keeping a `ROADMAP.md`, in the spirit of
 [Keep a Changelog](https://keepachangelog.com/). This repository holds
-version 1.0.0 of the convention and the one-page site that explains it.
-It isn't published yet.
+version 1.0.0 of the convention and the one-page site that explains it,
+published at https://keeparoadmap.com.
 
 ## Layout
 
