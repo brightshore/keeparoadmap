@@ -1,11 +1,11 @@
-# Not deployed yet. When the site goes live, Netlify runs the build and
-# publishes dist/. The build needs nothing but Node.
+# Netlify builds every push to main and publishes dist/ to keeparoadmap.com.
+# The build needs nothing but Node.
 [build]
   command = "npm run build"
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "24"
 
 # Serve the Markdown files the page links to as readable text.
 [[headers]]
