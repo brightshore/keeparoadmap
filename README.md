@@ -2,8 +2,8 @@
 
 A convention for keeping a `ROADMAP.md`, in the spirit of
 [Keep a Changelog](https://keepachangelog.com/). This repository holds
-version 1.0.0 of the convention and the one-page site that explains it.
-It isn't published yet.
+version 1.0.0 of the convention and the one-page site that explains it,
+published at https://keeparoadmap.com.
 
 ## Layout
 
@@ -20,7 +20,8 @@ It isn't published yet.
 - `build.mjs` is the build. It needs Node 20 or later and has no dependencies.
 - `test/` checks the build and the page's links.
 - `scripts/external-links.txt` lists every external URL on the page.
-- `netlify.toml` configures a future Netlify deploy. Nothing is deployed yet.
+- `netlify.toml` configures the Netlify deploy: every push to `main` builds
+  and publishes the site.
 
 ## Build
 

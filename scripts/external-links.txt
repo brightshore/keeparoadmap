@@ -15,3 +15,5 @@ https://creativecommons.org/licenses/by/4.0/ | Creative Commons Attribution 4.0 
 https://creativecommons.org/publicdomain/zero/1.0/ | CC0 1.0 Universal deed (our example's license)
 https://docs.github.com/en/issues/planning-and-tracking-with-projects/customizing-views-in-your-project/customizing-the-roadmap-layout | GitHub Docs: roadmap layout shows items "on a timeline"
 https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/about-milestones | GitHub Docs: milestones "track progress on groups of issues or pull requests"
+https://github.com/brightshore/keeparoadmap | This convention's own repository (public, default branch main)
+https://github.com/brightshore/keeparoadmap/issues | This repository's issues; issues are enabled and the page returns 200
